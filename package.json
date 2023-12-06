@@ -1,0 +1,12 @@
+{
+  "name": "command-app",
+  "version": "1.0.0",
+  "description": "This is commmand line application ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "index.js"
+  },
+  "author": "Md Rowshan Sheikh",
+  "license": "ISC"
+}
