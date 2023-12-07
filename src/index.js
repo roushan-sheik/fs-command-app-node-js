@@ -1,6 +1,13 @@
 import fs from "fs/promises";
+import { createFile } from "../utils/index.js";
 
 (async () => {
+  // ================== Commands =================
+  const CREATE_FILE = "create file";
+  const DELETE_FILE = "delete file";
+  const RENAME_FILE = "rename file";
+  const ADD_TO_FILE = "add to file";
+  // Open the file
   const commandFileHandler = await fs.open("../command.txt", "r");
   commandFileHandler.on("change", async () => {
     // get the size of  our file
@@ -14,7 +21,13 @@ import fs from "fs/promises";
     // the position that we want read the file from
     const position = 0;
     await commandFileHandler.read(buffer, offset, length, position);
-    console.log(buffer);
+    const command = buffer.toString("utf-8");
+    // console.log(command);
+
+    if (command.includes(CREATE_FILE)) {
+      const path = command.substring(CREATE_FILE.length + 1);
+      createFile(path);
+    }
   });
 
   const watcher = await fs.watch("../");
