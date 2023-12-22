@@ -20,6 +20,7 @@ import { createFile } from "../utils/index.js";
     const length = buffer.byteLength;
     // the position that we want read the file from
     const position = 0;
+    // Finally read the file
     await commandFileHandler.read(buffer, offset, length, position);
     const command = buffer.toString("utf-8");
     // console.log(command);
@@ -29,7 +30,7 @@ import { createFile } from "../utils/index.js";
       createFile(path);
     }
   });
-
+  // Watch the command file and target the event
   const watcher = await fs.watch("../");
   for await (const event of watcher) {
     if (event.eventType === "change") {
